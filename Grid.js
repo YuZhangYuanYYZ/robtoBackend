@@ -5,8 +5,8 @@ class Grid {
     }
 
     isInBorder(positionX, positionY) {
-        const isXInBorder = positionX > 0 && positionX<=6;
-        const isYInBorder = positionY > 0 && positionY <=6;
+        const isXInBorder = positionX >= 0 && positionX< 6;
+        const isYInBorder = positionY >= 0 && positionY < 6;
         return isXInBorder && isYInBorder;
     }
 }

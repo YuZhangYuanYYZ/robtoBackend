@@ -1,13 +1,18 @@
 const Command = require('./Command.js');
 
 class MoveCommand extends Command{
-    constructor(...props){
-        super(...props)
+    constructor(positionX, positionY, direction, grid){
+        super(positionX, positionY, direction)
+        this.grid = grid;
     }
-    
+
     execute(){
         switch (this.direction) {
             case "N":
+                if(!this.grid.isInBorder(this.positionX + 1,this.positionY)) {
+                    console.log("out of border, can not move");
+                    break;
+                }
                 this.positionY ++;
                 break;
             case "S":

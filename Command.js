@@ -1,7 +1,16 @@
 class Command {
-    constructor(turn, move) {
-        this.turn = turn;
-        this.move = move;
+    constructor(positionX, positionY, direction){
+        this.direction = direction;
+        this.positionX = positionX;
+        this.positionY = positionY;
+    }
+
+    execute(){
+        return { 
+            positionX: this.positionX, 
+            positionY: this.positionY,
+            direction: this.direction 
+        }
     }
 }
 

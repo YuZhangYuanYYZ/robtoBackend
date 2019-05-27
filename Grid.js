@@ -1,23 +1,13 @@
 class Grid {
-    consturctor(borderAlert, positionX, positionY) {
-        this.borderAlert = borderAlert;
+    consturctor(positionX, positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
     }
-    borderJudge(positionX, positionY) {
-        // console.log("this.positionX, positionY");
 
-        // console.log(this.positionX, this.positionY);
-        if (positionX < 0 || positionY > 6) {
-            this.borderAlert = true;
-        }
-        else {
-            this.borderAlert = false;
-        }
-        // console.log("positionX, positionY, this.borderAlert");
-
-        //console.log(positionX, positionY, this.borderAlert);
-        return this.borderAlert;
+    isInBorder(positionX, positionY) {
+        const isXInBorder = positionX > 0 && positionX<=6;
+        const isYInBorder = positionY > 0 && positionY <=6;
+        return isXInBorder && isYInBorder;
     }
 }
 

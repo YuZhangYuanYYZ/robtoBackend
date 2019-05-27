@@ -1,81 +1,38 @@
+const MoveCommand = require('./MoveCommand');
+const LeftCommand = require('./LeftCommand');
+const RightCommand = require('./RightCommand');
+const Command = require('./Command');
+
 class Robot {
-    construction(direction, positionX, positionY, turn) {
+    constructor( positionX, positionY, direction) {
         this.direction = direction;
         this.positionX = positionX;
         this.positionY = positionY;
-        this.turn = turn;
     }
-    calculateDirection(direction, turn) {
-        console.log("direction,turn");
-
-        console.log(direction, turn);
-        switch (direction) {
-            case "N":
-                switch (turn) {
-                    case "L": direction = "W";
-                        break;
-                    case "R": direction = "E"
-                    default: direction = direction;
-                }
-                console.log(direction, turn);
+    
+    runCommand(commandStr) {
+        let command;
+        switch (commandStr) {
+            case "move":
+                command = new MoveCommand(this.positionX, this.positionY, this.direction);
                 break;
-
-            case "E":
-                switch (turn) {
-                    case "L": direction = "N";
-                        break;
-                    case "R": direction = "S"
-                    default: direction = direction;
-                }
+             case "left":
+                command = new LeftCommand(this.positionX, this.positionY, this.direction);
                 break;
-
-            case "S":
-                switch (turn) {
-                    case "L": direction = "E";
-                        break;
-                    case "R": direction = "W"
-                    default: direction = direction;
-                }
-                break;
-
-            case "W":
-                switch (turn) {
-                    case "L": direction = "S";
-                        break;
-                    case "R": direction = "N"
-                    default: direction = direction;
-                }
-                break;
-
-            default: direction = direction;
+             case "right":
+                command = new RightCommand(this.positionX, this.positionY, this.direction);
+                break;   
+             default:  
+                command = new Command(this.positionX, this.positionY, this.direction);
         }
-        console.log(direction, turn);
-        return this.direction = direction;
+        const { direction, positionX, positionY } = command.execute();
+        this.direction = direction;
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
-    calculatePosition(positionX, positionY, direction, move, alert) {
-        console.log(alert);
 
-        if (alert) {
-            console.log("It's go out the border,please change direction!");
-        }
-        else {
-            console.log(move, direction, positionX, positionY, this.positionX, this.positionY);
-            if (move) {
-                switch (direction) {
-                    case "N": positionY = positionY + 1; break; console.log("positionY"); console.log(positionY);
-                    case "S": positionY = positionY - 1; break;
-                    case "E": positionX = positionX + 1; break;
-                    case "W": positionX = positionX - 1; break;
-                    default: positionX = positionX; positionY = positionY;
-                }
-            }
-            else {
-                positionX = positionX; positionY = positionY;
-            }
-        }
-        console.log(move, direction, positionX, positionY);
-
-        return { positionX, positionY }
+    printPosition(){
+        console.log(this.positionX, this.positionY,  this.direction);
     }
 }
 
